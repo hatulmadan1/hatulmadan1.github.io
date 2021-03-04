@@ -1,6 +1,8 @@
 header {
     display: flex;
     justify-content: space-between;
+    padding: 0 2%;
+    width: 96%;
 }
 
 .refresh {
@@ -8,12 +10,13 @@ header {
 }
 
 main {
+    min-width: 296px;
 }
 
 .card {
     width: 48%;
     margin: 1% 0;
-    min-width: 320px;
+    min-width: 296px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,18 +24,44 @@ main {
     margin-right: 0;
 }
 
+.current_city {
+    width: 96%;
+    padding: 0 2%;
+}
+
 .current_city .card {
     margin-right: 0;
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .current_city_header, .current_city .card ul {
     width: 48%;
-    min-width: 320px;
+    min-width: 296px;
     max-width: 640px;
 }
+
+.current_city_header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.current_city_header h2 {
+    width: 100%;
+}
+
+.current_city_header .temperature {
+    font-size: 300%;
+}
+
+.current_city_header img {
+    width: 25%;
+    height: 25%;
+}
+
 .current_city .card ul li {
     width: 100%;
 }
@@ -41,12 +70,23 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    width: 96%;
+    padding: 0 2%;
+}
+
+.selected_input {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .selected_cities {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
+    width: 96%;
+    padding: 0 2%;
 }
 
 .selected_cities .card {
@@ -58,15 +98,15 @@ main {
 
 .card ul {
     width: 100%;
-    margin-left: 0;
-    padding-left: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .card ul li {
     width: 100%;
     height: 40px;
     background-color: #808080;
-    margin: 5px 0;
+    margin: 1% 0;
     color: white;
     list-style-type: none;
     display: flex;
@@ -87,22 +127,43 @@ main {
 h1, h2, h3 {
     color: #606060;
     width: fit-content;
-    font-size: 200%;
     margin: 0;
 }
 
-.delete {
-    background-color: #404040;
+h1, h2 {
+    font-size: 200%;
+}
+
+h3 {
+    font-size: 150%;
+}
+
+.temperature {
+    font-weight: bold;
+    font-size: 200%;
+}
+
+.round_button {
+    background-color: #505050;
     color: white;
     border-radius: 50%;
     border: none;
-    padding: 1%;
+    width: 35px;
+    height: 35px;
+    font-size: 150%;
+    font-weight: lighter;
+    padding: 0;
 }
 
-@media only screen and (max-width: 600px) {
-    .card {
-        width: 100%;
-    }
-
+img {
+    width: 15%;
+    height: 15%;
 }
 
+input {
+    padding: 10px 15px;
+    padding-right: 0;
+    color: #808080;
+    background-color: #cecece;
+    border: none;
+}
