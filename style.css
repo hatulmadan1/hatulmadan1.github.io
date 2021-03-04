@@ -1,0 +1,108 @@
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.refresh {
+    justify-self: center;
+}
+
+main {
+}
+
+.card {
+    width: 48%;
+    margin: 1% 0;
+    min-width: 320px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-right: 0;
+}
+
+.current_city .card {
+    margin-right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.current_city_header, .current_city .card ul {
+    width: 48%;
+    min-width: 320px;
+    max-width: 640px;
+}
+.current_city .card ul li {
+    width: 100%;
+}
+
+.selected_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selected_cities {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.selected_cities .card {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 640px;
+}
+
+.card ul {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.card ul li {
+    width: 100%;
+    height: 40px;
+    background-color: #808080;
+    margin: 5px 0;
+    color: white;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: inherit;
+}
+
+.weather_type {
+    font-weight: bold;
+    margin-left: 1%;
+}
+
+.weather_value {
+    margin: 0 1%;
+}
+
+h1, h2, h3 {
+    color: #606060;
+    width: fit-content;
+    font-size: 200%;
+    margin: 0;
+}
+
+.delete {
+    background-color: #404040;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    padding: 1%;
+}
+
+@media only screen and (max-width: 600px) {
+    .card {
+        width: 100%;
+    }
+
+}
+
