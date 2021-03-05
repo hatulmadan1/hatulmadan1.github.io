@@ -8,7 +8,7 @@
     <body>
         <header>
             <h1>Погода здесь</h1>
-            <button class="refresh">Обновить геолокацию</button>
+            <button class="refresh"><span class="refresh_long">Обновить геолокацию</span><span class="refresh_short">&#8634</span></button>
         </header>
         <main>
             <div class="current_city">
@@ -37,8 +37,8 @@
                 </div>
             </div>
             
-            <div class="selected_cities">
-                <div class="card">
+            <ul class="selected_cities">
+                <li class="card">
                     <h3>Moscow</h3>
                     <span class="temperature">8&#176C</span>
                     <img src="cloud.svg"/> 
@@ -51,8 +51,8 @@
                         <li><span class="weather_type">Влажность</span><span class="weather_value">52 %</span></li>
                         <li><span class="weather_type">Координаты</span><span class="weather_value">[59.88, 30.42]</span></li>
                     </ul>
-                </div>
-                <div class="card">
+                </li>
+                <li class="card">
                     <h3>Helsinki</h3>
                     <span class="temperature">8&#176C</span>
                     <img src="cloud.svg"/> 
@@ -65,8 +65,8 @@
                         <li><span class="weather_type">Влажность</span><span class="weather_value">52 %</span></li>
                         <li><span class="weather_type">Координаты</span><span class="weather_value">[59.88, 30.42]</span></li>
                     </ul>
-                </div>
-                <div class="card">
+                </li>
+                <li class="card">
                     <h3>Moscow</h3>
                     <span class="temperature">8&#176C</span>
                     <img src="cloud.svg"/> 
@@ -79,8 +79,8 @@
                         <li><span class="weather_type">Влажность</span><span class="weather_value">52 %</span></li>
                         <li><span class="weather_type">Координаты</span><span class="weather_value">[59.88, 30.42]</span></li>
                     </ul>
-                </div>
-                <div class="card">
+                </li>
+                <li class="card">
                     <h3>Helsinki</h3>
                     <span class="temperature">8&#176C</span>
                     <img src="cloud.svg"/> 
@@ -93,8 +93,8 @@
                         <li><span class="weather_type">Влажность</span><span class="weather_value">52 %</span></li>
                         <li><span class="weather_type">Координаты</span><span class="weather_value">[59.88, 30.42]</span></li>
                     </ul>
-                </div>
-            </div>
+                </li>
+            </ul>
         </main>
     </body>
 </html>

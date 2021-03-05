@@ -1,12 +1,22 @@
 header {
     display: flex;
     justify-content: space-between;
-    padding: 0 2%;
-    width: 96%;
+    padding-left: 2%;
+    width: 57%;
 }
 
 .refresh {
-    justify-self: center;
+    border: none;
+    color: #505050;
+    background-color: #cecece;
+    border-radius: 5px;
+    width: 32%;
+    min-width: fit-content;
+    max-height: fit-content;
+}
+
+.refresh_short {
+    display: none;
 }
 
 main {
@@ -75,10 +85,16 @@ main {
     padding: 0 2%;
 }
 
+.selected_header h2 {
+    width: 48%;
+}
+
 .selected_input {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
+    width: 48%;
+    min-width: fit-content;
 }
 
 .selected_cities {
@@ -163,7 +179,33 @@ img {
 input {
     padding: 10px 15px;
     padding-right: 0;
-    color: #808080;
+    color: #505050;
     background-color: #cecece;
     border: none;
+    width: 60%;
+    min-width: fit-content;
+    margin-right: 3%;
+}
+
+@media only screen and (max-width: 636px) {
+    .card {
+        width: 100%;
+    }
+    .current_city_header {
+        width: 100%;
+    }
+    .current_city .card ul {
+        width: 100%;
+    }
+    .selected_input {
+        width: 100%;
+    }
+    .refresh_long {
+        display: none;
+    }
+    .refresh_short {
+        display: inline;
+        font-size: 200%;
+        font-weight: bold;
+    }
 }
