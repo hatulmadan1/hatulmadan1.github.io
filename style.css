@@ -13,6 +13,8 @@ header {
     border-radius: 5px;
     width: 32%;
     min-width: fit-content;
+    font-size: 100%;
+    padding: 2% 1%;
 }
 
 .refresh_short {
