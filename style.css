@@ -1,6 +1,7 @@
 header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding-left: 2%;
     width: 57%;
 }
@@ -12,7 +13,6 @@ header {
     border-radius: 5px;
     width: 32%;
     min-width: fit-content;
-    max-height: fit-content;
 }
 
 .refresh_short {
@@ -83,6 +83,7 @@ main {
     flex-wrap: wrap;
     width: 96%;
     padding: 0 2%;
+    min-width: 296;
 }
 
 .selected_header h2 {
@@ -94,7 +95,7 @@ main {
     justify-content: flex-end;
     align-items: center;
     width: 48%;
-    min-width: fit-content;
+    min-width: 296;
 }
 
 .selected_cities {
@@ -187,7 +188,7 @@ input {
     margin-right: 3%;
 }
 
-@media only screen and (max-width: 636px) {
+@media only screen and (max-width: 648px) {
     .card {
         width: 100%;
     }
@@ -199,6 +200,8 @@ input {
     }
     .selected_input {
         width: 100%;
+        min-width: 296px;
+        justify-content: space-between;
     }
     .refresh_long {
         display: none;
