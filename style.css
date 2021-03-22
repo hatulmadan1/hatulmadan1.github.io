@@ -141,6 +141,7 @@ main {
 
 .weather_value {
     margin: 0 1%;
+    text-align: end;
 }
 
 h1, h2, h3 {
@@ -191,6 +192,13 @@ input {
 }
 
 @media only screen and (max-width: 648px) {
+    header {
+        width: 100%;
+    }
+    header h1 {
+        width: 70%;
+        font-size: 160%;
+    }
     .card {
         width: 100%;
     }
