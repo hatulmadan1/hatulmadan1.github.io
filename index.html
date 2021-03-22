@@ -12,11 +12,11 @@
         </header>
         <main>
             <div class="current_city">
-                <div class="card">
+                <div id="current" class="card">
                     <div class="current_city_header">
-                        <h2>Saint-Petersburg</h2>
+                        <h2 id="current_name">Saint-Petersburg</h2>
                         <img src="cloud.svg"/>  
-                        <span class="temperature">8&#176C</span>
+                        <span id="current_temp" class="temperature">8&#176C</span>
                     </div>
                     
                     <ul>
@@ -28,6 +28,9 @@
                         <li><span class="weather_type">Координаты</span><span class="weather_value">[59.88, 30.42]</span></li>
                     </ul>
                 </div>
+            </div>
+            <div class="loading hidden">
+                <h1>Loading data...</h1>
             </div>
             <div class="selected_header">
                 <h2>Избранное</h2>
@@ -96,5 +99,6 @@
                 </li>
             </ul>
         </main>
+        <script src="logic.js"></script>
     </body>
 </html>
