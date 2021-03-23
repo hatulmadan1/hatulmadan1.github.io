@@ -14,18 +14,17 @@
             <div class="current_city">
                 <div id="current" class="card">
                     <div class="current_city_header">
-                        <h2 id="current_name">Saint-Petersburg</h2>
-                        <img src="cloud.svg"/>  
-                        <span id="current_temp" class="temperature">8&#176C</span>
+                        <h2 id="current_name">undefined</h2>
+                        <img id="current_img" src="cloud.svg"/>  
+                        <span id="current_temp" class="temperature">undefined&#176C</span>
                     </div>
                     
                     <ul>
-                        <li><span class="weather_type">Ветер</span><span class="weather_value">Moderate breeeze, 6.0 m/s,
-                            North-northwest</span></li>
-                        <li><span class="weather_type">Облачность</span><span class="weather_value">Broken clouds</span></li>
-                        <li><span class="weather_type">Давление</span><span class="weather_value">1013 hpa</span></li>
-                        <li><span class="weather_type">Влажность</span><span class="weather_value">52 %</span></li>
-                        <li><span class="weather_type">Координаты</span><span class="weather_value">[59.88, 30.42]</span></li>
+                        <li><span class="weather_type">Ветер</span><span class="weather_value">undefined</span></li>
+                        <li><span class="weather_type">Облачность</span><span class="weather_value">undefined</span></li>
+                        <li><span class="weather_type">Давление</span><span class="weather_value">undefined</span></li>
+                        <li><span class="weather_type">Влажность</span><span class="weather_value">undefined</span></li>
+                        <li><span class="weather_type">Координаты</span><span class="weather_value">undefined</span></li>
                     </ul>
                 </div>
             </div>
@@ -36,69 +35,29 @@
                 <h2>Избранное</h2>
                 <form class="selected_input">
                     <input placeholder="Добавить новый город"/>
-                    <button class="round_button">+</button>  
+                    <button id="add_button" class="round_button">+</button>  
                 </form>
             </div>
             
             <ul class="selected_cities">
-                <li class="card">
-                    <h3>Moscow</h3>
-                    <span class="temperature">8&#176C</span>
-                    <img src="cloud.svg"/> 
-                    <button class="round_button">&#215</button>
-                    <ul>
-                        <li><span class="weather_type">Ветер</span><span class="weather_value">Moderate breeeze, 6.0 m/s,
-                            North-northwest</span></li>
-                        <li><span class="weather_type">Облачность</span><span class="weather_value">Broken clouds</span></li>
-                        <li><span class="weather_type">Давление</span><span class="weather_value">1013 hpa</span></li>
-                        <li><span class="weather_type">Влажность</span><span class="weather_value">52 %</span></li>
-                        <li><span class="weather_type">Координаты</span><span class="weather_value">[59.88, 30.42]</span></li>
-                    </ul>
-                </li>
-                <li class="card">
-                    <h3>Helsinki</h3>
-                    <span class="temperature">8&#176C</span>
-                    <img src="cloud.svg"/> 
-                    <button class="round_button">&#215</button>
-                    <ul>
-                        <li><span class="weather_type">Ветер</span><span class="weather_value">Moderate breeeze, 6.0 m/s,
-                            North-northwest</span></li>
-                        <li><span class="weather_type">Облачность</span><span class="weather_value">Broken clouds</span></li>
-                        <li><span class="weather_type">Давление</span><span class="weather_value">1013 hpa</span></li>
-                        <li><span class="weather_type">Влажность</span><span class="weather_value">52 %</span></li>
-                        <li><span class="weather_type">Координаты</span><span class="weather_value">[59.88, 30.42]</span></li>
-                    </ul>
-                </li>
-                <li class="card">
-                    <h3>Moscow</h3>
-                    <span class="temperature">8&#176C</span>
-                    <img src="cloud.svg"/> 
-                    <button class="round_button">&#215</button>
-                    <ul>
-                        <li><span class="weather_type">Ветер</span><span class="weather_value">Moderate breeeze, 6.0 m/s,
-                            North-northwest</span></li>
-                        <li><span class="weather_type">Облачность</span><span class="weather_value">Broken clouds</span></li>
-                        <li><span class="weather_type">Давление</span><span class="weather_value">1013 hpa</span></li>
-                        <li><span class="weather_type">Влажность</span><span class="weather_value">52 %</span></li>
-                        <li><span class="weather_type">Координаты</span><span class="weather_value">[59.88, 30.42]</span></li>
-                    </ul>
-                </li>
-                <li class="card">
-                    <h3>Helsinki</h3>
-                    <span class="temperature">8&#176C</span>
-                    <img src="cloud.svg"/> 
-                    <button class="round_button">&#215</button>
-                    <ul>
-                        <li><span class="weather_type">Ветер</span><span class="weather_value">Moderate breeeze, 6.0 m/s,
-                            North-northwest</span></li>
-                        <li><span class="weather_type">Облачность</span><span class="weather_value">Broken clouds</span></li>
-                        <li><span class="weather_type">Давление</span><span class="weather_value">1013 hpa</span></li>
-                        <li><span class="weather_type">Влажность</span><span class="weather_value">52 %</span></li>
-                        <li><span class="weather_type">Координаты</span><span class="weather_value">[59.88, 30.42]</span></li>
-                    </ul>
-                </li>
+                
             </ul>
         </main>
+        <template>
+            <li class="card">
+                <h3>Moscow</h3>
+                <span class="temperature">undefined&#176C</span>
+                <img src="cloud.svg"/> 
+                <button class="round_button">&#215</button>
+                <ul>
+                    <li><span class="weather_type">Ветер</span><span class="weather_value">undefined</span></li>
+                    <li><span class="weather_type">Облачность</span><span class="weather_value">undefined</span></li>
+                    <li><span class="weather_type">Давление</span><span class="weather_value">undefined</span></li>
+                    <li><span class="weather_type">Влажность</span><span class="weather_value">undefined</span></li>
+                    <li><span class="weather_type">Координаты</span><span class="weather_value">undefined</span></li>
+                </ul>
+            </li>
+        </template>
         <script src="logic.js"></script>
     </body>
 </html>
