@@ -1,4 +1,8 @@
 let apiKey = '143618f1ecf17bbf953c258e3bf1cf5b';
+let selectedLog = [];
+/*if (localStorage.length != 0) { 
+    selectedLog = JSON.parse(localStorage.getItem('selected')); 
+}*/
 
 var cardType = {
     Header: 0,
@@ -36,8 +40,8 @@ function setActualInfoCurrent(txt) {
     document.querySelector('.current_city').classList.remove('hidden');
 }
 
-function setSelected(txt) {
-    let newCity = document.querySelector('.selected_cities').lastElementChild;
+function setSelected(txt, obj) {
+    let newCity = obj;
     let info = parseData(txt);
     let i = 0;
     for (let j = 1; j < 10; j += 2) {
@@ -51,14 +55,21 @@ function setSelected(txt) {
         {
             let concreteButtonParent = evt.currentTarget.parentElement;
             concreteButtonParent.parentElement.removeChild(concreteButtonParent);
+            let position = selectedLog.indexOf(concreteButtonParent.childNodes[1].innerHTML);
+            selectedLog.splice(position, 1);
+            localStorage.setItem('selected', JSON.stringify(selectedLog));
         }
     );
 
-    document.querySelector('.selected_cities').lastElementChild.childNodes[11].classList.add('hidden');
-    document.querySelector('.selected_cities').lastElementChild.childNodes[9].classList.remove('hidden');
+    newCity.childNodes[11].classList.add('hidden');
+    newCity.childNodes[9].classList.remove('hidden');
+
+    selectedLog.push(newCity.childNodes[1].innerHTML);
+    localStorage.setItem('selected', JSON.stringify(selectedLog));
+    console.log(localStorage.getItem('selected'));
 }
 
-function getParsedData(request, type) {
+function getParsedData(request, type, obj) {
     fetch(request).            
         then(
             res => {
@@ -71,7 +82,7 @@ function getParsedData(request, type) {
                     setActualInfoCurrent(txt);
                 }
                 else if (type === cardType.Selected) {
-                    setSelected(txt);
+                    setSelected(txt, obj);
                 }
             }
         ).
@@ -79,7 +90,7 @@ function getParsedData(request, type) {
             err => {
                 console.error("API error. Fetch failed: ", err);
                 window.alert("Sorry, сan't add a non-existent city");
-                document.querySelector('.selected_cities').lastElementChild.remove();
+                obj.remove();
             }
         );
 }
@@ -89,7 +100,10 @@ function getAPIDataByCoords(lat, lon) {
 }
 
 function getAPIDataByName(cityName) {
-    getParsedData(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`, cardType.Selected);
+    getParsedData(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`, 
+    cardType.Selected, 
+    document.querySelector('.selected_cities').lastElementChild
+    );
 }
 
 function loadCurrentData() {
@@ -125,9 +139,6 @@ document.querySelector('form.selected_input').addEventListener("submit",
         evt.preventDefault();
         document.querySelector('.selected_cities').appendChild(tmpl.content.cloneNode(true));
 
-        //document.querySelector('.selected_cities').lastElementChild.childNodes[11].classList.remove('hidden');
-        //document.querySelector('.selected_cities').lastElementChild.classList.add('hidden');
-
         let cityName = document.querySelector('form.selected_input input').value;
         document.querySelector('.selected_cities').lastElementChild.childNodes[1].innerHTML = cityName;
         getAPIDataByName(cityName);
@@ -136,3 +147,11 @@ document.querySelector('form.selected_input').addEventListener("submit",
 );
 
 loadCurrentData();
+
+console.log(JSON.parse(localStorage.getItem('selected')));
+JSON.parse(localStorage.getItem('selected')).forEach(element => {
+    document.querySelector('.selected_cities').appendChild(tmpl.content.cloneNode(true));
+    document.querySelector('.selected_cities').lastElementChild.childNodes[1].innerHTML = element;
+    console.log(element);
+    getAPIDataByName(element);
+});
