@@ -1,8 +1,5 @@
 let apiKey = '143618f1ecf17bbf953c258e3bf1cf5b';
 let selectedLog = [];
-/*if (localStorage.length != 0) { 
-    selectedLog = JSON.parse(localStorage.getItem('selected')); 
-}*/
 
 var cardType = {
     Header: 0,
@@ -73,6 +70,10 @@ function getParsedData(request, type, obj) {
     fetch(request).            
         then(
             res => {
+                if (!res.ok) {
+                    throw new Error("Failed to get API data.");
+                }
+
                 return res.json()
             }
         ).
@@ -89,8 +90,10 @@ function getParsedData(request, type, obj) {
         catch(
             err => {
                 console.error("API error. Fetch failed: ", err);
-                window.alert("Sorry, сan't add a non-existent city");
-                obj.remove();
+                window.alert("Sorry, fetch failed. Check your internet connection or city name");
+                if (obj != undefined) {
+                    obj.remove();
+                }
             }
         );
 }
