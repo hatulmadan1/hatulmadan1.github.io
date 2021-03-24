@@ -46,6 +46,16 @@ function setSelected(txt) {
     newCity.childNodes[1].innerHTML = info[i++];
     newCity.childNodes[5].src = `http://openweathermap.org/img/wn/${info[i++]}@4x.png`;
     newCity.childNodes[3].innerHTML = Math.round(info[i++]) + '&#176C';
+    newCity.childNodes[7].addEventListener("click", 
+        evt =>
+        {
+            let concreteButtonParent = evt.currentTarget.parentElement;
+            concreteButtonParent.parentElement.removeChild(concreteButtonParent);
+        }
+    );
+
+    document.querySelector('.selected_cities').lastElementChild.childNodes[11].classList.add('hidden');
+    document.querySelector('.selected_cities').lastElementChild.childNodes[9].classList.remove('hidden');
 }
 
 function getParsedData(request, type) {
@@ -67,9 +77,9 @@ function getParsedData(request, type) {
         ).
         catch(
             err => {
-                console.error("API error. Fetch failed: ", err, pos);
-
-                onFail(err);
+                console.error("API error. Fetch failed: ", err);
+                window.alert("Sorry, сan't add a non-existent city");
+                document.querySelector('.selected_cities').lastElementChild.remove();
             }
         );
 }
@@ -110,13 +120,19 @@ function loadCurrentData() {
 
 document.querySelector('.refresh').addEventListener("click", function() { loadCurrentData() });
 
-loadCurrentData();
 document.querySelector('form.selected_input').addEventListener("submit", 
     evt => {
         evt.preventDefault();
         document.querySelector('.selected_cities').appendChild(tmpl.content.cloneNode(true));
-        getAPIDataByName(document.querySelector('form.selected_input input').value);
+
+        //document.querySelector('.selected_cities').lastElementChild.childNodes[11].classList.remove('hidden');
+        //document.querySelector('.selected_cities').lastElementChild.classList.add('hidden');
+
+        let cityName = document.querySelector('form.selected_input input').value;
+        document.querySelector('.selected_cities').lastElementChild.childNodes[1].innerHTML = cityName;
+        getAPIDataByName(cityName);
         document.querySelector('form.selected_input input').value='';
-        console.log("ass ＼(^o^)／"); 
     }
 );
+
+loadCurrentData();

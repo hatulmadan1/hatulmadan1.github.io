@@ -46,16 +46,19 @@
         <template id="tmpl">
             <li class="card">
                 <h3>Undefined</h3>
-                <span class="temperature">und&#176C</span>
-                <img src="cloud.svg"/> 
-                <button class="round_button">&#215</button>
-                <ul>
+                <span class="temperature"></span>
+                <img src="loading.svg"/> 
+                <button id="delete_button" class="round_button">&#215</button>
+                <ul class="hidden">
                     <li><span class="weather_type">Ветер</span><span class="weather_value">undefined</span></li>
                     <li><span class="weather_type">Облачность</span><span class="weather_value">undefined</span></li>
                     <li><span class="weather_type">Давление</span><span class="weather_value">undefined</span></li>
                     <li><span class="weather_type">Влажность</span><span class="weather_value">undefined</span></li>
                     <li><span class="weather_type">Координаты</span><span class="weather_value">undefined</span></li>
                 </ul>
+                <div class="loading">
+                    <h1>Loading data...</h1>
+                </div>
             </li>
         </template>
         <script src="logic.js"></script>
