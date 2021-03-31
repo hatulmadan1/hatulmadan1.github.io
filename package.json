@@ -1,0 +1,23 @@
+{
+  "name": "web-weather",
+  "version": "1.0.0",
+  "description": "web app using current weather API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hatulmadan1/hatulmadan1.github.io.git"
+  },
+  "author": "hatulmadan1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hatulmadan1/hatulmadan1.github.io/issues"
+  },
+  "homepage": "https://github.com/hatulmadan1/hatulmadan1.github.io#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1"
+  }
+}

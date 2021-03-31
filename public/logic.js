@@ -103,7 +103,7 @@ function getAPIDataByCoords(lat, lon) {
 }
 
 function getAPIDataByName(cityName) {
-    getParsedData(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`, 
+    getParsedData(`http://localhost:3000/weather/city?q=${cityName}`, 
     cardType.Selected, 
     document.querySelector('.selected_cities').lastElementChild
     );
