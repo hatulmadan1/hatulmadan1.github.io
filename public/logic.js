@@ -52,10 +52,28 @@ function setSelected(txt, obj, startup) {
         evt =>
         {
             let concreteButtonParent = evt.currentTarget.parentElement;
-            concreteButtonParent.parentElement.removeChild(concreteButtonParent);
-            let position = selectedLog.indexOf(concreteButtonParent.childNodes[1].innerHTML);
-            selectedLog.splice(position, 1);
-            localStorage.setItem('selected', JSON.stringify(selectedLog));
+            evt.currentTarget.disabled = true;
+            //let position = selectedLog.indexOf(concreteButtonParent.childNodes[1].innerHTML);
+            //selectedLog.splice(position, 1);
+            //localStorage.setItem('selected', JSON.stringify(selectedLog));
+            fetch(`http://localhost:3000/favourites`,
+            {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8"
+                    },
+                body: JSON.stringify({ cityName: concreteButtonParent.childNodes[1].innerHTML})
+            }).then(res => {
+                if(!res.ok) {
+                    throw new Error();
+                }
+
+                concreteButtonParent.parentElement.removeChild(concreteButtonParent);
+            })
+            .catch(err => {
+                console.error("Delete from DB failed", err);
+                window.alert("Sorry, deleting DB failed. Check your internet connection");
+            });
         }
     );
 

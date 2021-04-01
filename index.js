@@ -98,8 +98,8 @@ app.post("/favourites", function(request, response){
     response.status(200).send("Added succesfully");
 });
 app.delete("/favourites", function(request, response){
-    let cityToDelete = "";                              //how to get from delete??
-    mongoClient.connect(function(err, client){
+    let cityToDelete = request.body.cityName;
+    MongoClient.connect("mongodb://localhost:27017/", { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client){
         const db = client.db("citiesdb");
 
         if(err) 
