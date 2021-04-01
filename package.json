@@ -18,6 +18,7 @@
   "homepage": "https://github.com/hatulmadan1/hatulmadan1.github.io#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mongodb": "^3.6.5",
     "node-fetch": "^2.6.1"
   }
 }

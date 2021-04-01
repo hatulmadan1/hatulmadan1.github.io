@@ -99,7 +99,7 @@ function getParsedData(request, type, obj) {
 }
 
 function getAPIDataByCoords(lat, lon) {
-    getParsedData(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`, cardType.Header);
+    getParsedData(`http://localhost:3000/weather/coordinates?lat=${lat}&lon=${lon}`, cardType.Header);
 }
 
 function getAPIDataByName(cityName) {
@@ -149,12 +149,35 @@ document.querySelector('form.selected_input').addEventListener("submit",
     }
 );
 
-loadCurrentData();
+function loadFromDB() {
+    fetch(`http://localhost:3000/favourites`).            
+        then(
+            res => {
+                if (!res.ok) {
+                    throw new Error("Failed to get DB data");
+                }
 
-console.log(JSON.parse(localStorage.getItem('selected')));
-JSON.parse(localStorage.getItem('selected')).forEach(element => {
-    document.querySelector('.selected_cities').appendChild(tmpl.content.cloneNode(true));
-    document.querySelector('.selected_cities').lastElementChild.childNodes[1].innerHTML = element;
-    console.log(element);
-    getAPIDataByName(element);
-});
+                return res.json()
+            }
+        ).
+        then(
+            txt => {
+                console.log(txt);
+                txt.forEach(element => {
+                    document.querySelector('.selected_cities').appendChild(tmpl.content.cloneNode(true));
+                    document.querySelector('.selected_cities').lastElementChild.childNodes[1].innerHTML = element;
+                    console.log(element);
+                    getAPIDataByName(element);
+                });
+            }
+        ).
+        catch(
+            err => {
+                console.error("DB error. Fetch failed: ", err);
+                window.alert("Sorry, fetch failed. Troubles with DB");
+            }
+        );
+}
+
+loadCurrentData();
+loadFromDB();
