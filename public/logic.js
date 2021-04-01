@@ -20,7 +20,7 @@ function parseData(txt) {
 }
 
 function setActualInfoCurrent(txt) {
-    console.log(txt);
+    //console.log(txt);
     let info = parseData(txt);
     let currentCityFields = document.querySelectorAll('#current ul li span.weather_value');
     let i = 0;
@@ -44,7 +44,7 @@ function setSelected(txt, obj, startup) {
     for (let j = 1; j < 10; j += 2) {
         newCity.childNodes[9].childNodes[j].childNodes[1].innerHTML = info[i++]
     }
-    let userCityName = newCity.childNodes[1].innerHTML;
+    //let userCityName = newCity.childNodes[1].innerHTML;
     newCity.childNodes[1].innerHTML = info[i++];
     newCity.childNodes[5].src = `http://openweathermap.org/img/wn/${info[i++]}@4x.png`;
     newCity.childNodes[3].innerHTML = Math.round(info[i++]) + '&#176C';
@@ -71,9 +71,9 @@ function setSelected(txt, obj, startup) {
             {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json;charset=utf-8"
                     },
-                body: JSON.stringify({ cityName: userCityName})
+                body: JSON.stringify({ cityName: newCity.childNodes[1].innerHTML})
             }).then(res => {
                 if(!res.ok) {
                     throw new Error();
@@ -88,10 +88,11 @@ function setSelected(txt, obj, startup) {
             });
     }
     
-    console.log(localStorage.getItem('selected'));
+    //console.log(localStorage.getItem('selected'));
 }
 
 function getParsedData(request, type, obj, startup) {
+    console.log(request);
     fetch(request).            
         then(
             res => {
@@ -128,6 +129,7 @@ function getAPIDataByCoords(lat, lon) {
 }
 
 function getAPIDataByName(cityName, startup) {
+    console.log(cityName);
     getParsedData(`http://localhost:3000/weather/city?q=${cityName}`, 
     cardType.Selected, 
     document.querySelector('.selected_cities').lastElementChild,
@@ -189,11 +191,11 @@ function loadFromDB() {
         ).
         then(
             txt => {
-                console.log(txt);
+                //console.log(txt);
                 txt.forEach(element => {
                     document.querySelector('.selected_cities').appendChild(tmpl.content.cloneNode(true));
                     document.querySelector('.selected_cities').lastElementChild.childNodes[1].innerHTML = element;
-                    console.log(element);
+                    //console.log(element);
                     getAPIDataByName(element, true);
                 });
             }

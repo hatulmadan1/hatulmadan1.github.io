@@ -12,10 +12,12 @@ const url = "mongodb://localhost:27017/";
 let apiKey = '143618f1ecf17bbf953c258e3bf1cf5b';
 
 function processQuery(query, response) {
-    fetch(query).            
+    //console.log(query);
+    fetch(encodeURI(query)).            
     then(
         res => {
             if (!res.ok) {
+                console.log(res);
                 throw new Error("Failed to get API data.");
             }
 
@@ -29,6 +31,7 @@ function processQuery(query, response) {
     ).
     catch(
         err => {
+            //console.log(err);
             response.status(500).send('Sorry, now response available');
         }
     );
@@ -36,6 +39,7 @@ function processQuery(query, response) {
 
 app.get("/weather/city", function(request, response){
     let cityName = request.query.q;
+    //console.log(cityName);
     processQuery(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`, response);
 });
 app.get("/weather/coordinates", function(request, response){
