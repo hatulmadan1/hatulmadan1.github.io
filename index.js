@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
-app.use(express.static('public'));
+const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
-
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.json());
 const url = "mongodb://localhost:27017/";
-const mongoClient = new MongoClient(url, { useUnifiedTopology: true,
-    useNewUrlParser: true });
+//const mongoClient = new MongoClient(url, { useUnifiedTopology: true, useNewUrlParser: true });
 
 let apiKey = '143618f1ecf17bbf953c258e3bf1cf5b';
 
@@ -43,16 +44,16 @@ app.get("/weather/coordinates", function(request, response){
     processQuery(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`, response);
 });
 app.get("/favourites", function(request, response){
-    mongoClient.connect(function(err, client){
+    MongoClient.connect("mongodb://localhost:27017/", { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client){
         const db = client.db("citiesdb");
         const collection = db.collection("cities");
         
         collection.find().toArray(function(err, results){
             let result = [];
             results.forEach(elem => {result.push(elem.name)});
-            console.log(result);
+            console.log(results);
             response.status(200).send(JSON.stringify(result));
-            client.close();
+            
 
             if(err){
                 response.status(500).send("Loading from DB failed");
@@ -64,30 +65,31 @@ app.get("/favourites", function(request, response){
             response.status(500).send("Loading from DB failed");
             return console.log(err);
         }
+        //client.close();
     });
     
 });
 app.post("/favourites", function(request, response){
-    let newCity = "";                                   //how to get from post??
-    mongoClient.connect(function(err, client){
-        const db = client.db("citiesdb");
-        const collection = db.collection("cities");
-        
-        collection.insertOne(newCity, function(err, results){
-              
-            console.log(results);
-            client.close();
+    let newCity = request.body.cityName;
+    MongoClient.connect("mongodb://localhost:27017/", { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client){
+        //const db = client.db("citiesdb");
+        //const collection = db.collection("cities");
 
-            if(err){
+        client.db("citiesdb").collection("cities").insertOne({'name': newCity}, function(err, results){
+            console.log(results);
+
+            /*if(err){
                 response.status(500).send("Adding to DB failed");
                 return console.log(err);
-            }
+            }*/
         });
 
         if(err){
             response.status(500).send("Adding to DB failed");
             return console.log(err);
         }
+
+        //client.close();
     });
     response.status(200).send("Added succesfully");
 });

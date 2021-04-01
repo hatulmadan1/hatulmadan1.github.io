@@ -37,13 +37,14 @@ function setActualInfoCurrent(txt) {
     document.querySelector('.current_city').classList.remove('hidden');
 }
 
-function setSelected(txt, obj) {
+function setSelected(txt, obj, startup) {
     let newCity = obj;
     let info = parseData(txt);
     let i = 0;
     for (let j = 1; j < 10; j += 2) {
         newCity.childNodes[9].childNodes[j].childNodes[1].innerHTML = info[i++]
     }
+    let userCityName = newCity.childNodes[1].innerHTML;
     newCity.childNodes[1].innerHTML = info[i++];
     newCity.childNodes[5].src = `http://openweathermap.org/img/wn/${info[i++]}@4x.png`;
     newCity.childNodes[3].innerHTML = Math.round(info[i++]) + '&#176C';
@@ -62,11 +63,35 @@ function setSelected(txt, obj) {
     newCity.childNodes[9].classList.remove('hidden');
 
     selectedLog.push(newCity.childNodes[1].innerHTML);
-    localStorage.setItem('selected', JSON.stringify(selectedLog));
+
+    //localStorage.setItem('selected', JSON.stringify(selectedLog));
+    if (!startup) {
+        //console.log(newCity.childNodes[1].innerHTML);
+        fetch(`http://localhost:3000/favourites`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                    },
+                body: JSON.stringify({ cityName: userCityName})
+            }).then(res => {
+                if(!res.ok) {
+                    throw new Error();
+                }
+            })
+            .catch(err => {
+                console.error("Add to DB failed", err);
+                window.alert("Sorry, adding to DB failed. Check your internet connection");
+                if (obj != undefined) {
+                    obj.remove();
+                }
+            });
+    }
+    
     console.log(localStorage.getItem('selected'));
 }
 
-function getParsedData(request, type, obj) {
+function getParsedData(request, type, obj, startup) {
     fetch(request).            
         then(
             res => {
@@ -83,7 +108,7 @@ function getParsedData(request, type, obj) {
                     setActualInfoCurrent(txt);
                 }
                 else if (type === cardType.Selected) {
-                    setSelected(txt, obj);
+                    setSelected(txt, obj, startup);
                 }
             }
         ).
@@ -102,10 +127,11 @@ function getAPIDataByCoords(lat, lon) {
     getParsedData(`http://localhost:3000/weather/coordinates?lat=${lat}&lon=${lon}`, cardType.Header);
 }
 
-function getAPIDataByName(cityName) {
+function getAPIDataByName(cityName, startup) {
     getParsedData(`http://localhost:3000/weather/city?q=${cityName}`, 
     cardType.Selected, 
-    document.querySelector('.selected_cities').lastElementChild
+    document.querySelector('.selected_cities').lastElementChild,
+    startup
     );
 }
 
@@ -144,12 +170,13 @@ document.querySelector('form.selected_input').addEventListener("submit",
 
         let cityName = document.querySelector('form.selected_input input').value;
         document.querySelector('.selected_cities').lastElementChild.childNodes[1].innerHTML = cityName;
-        getAPIDataByName(cityName);
+        getAPIDataByName(cityName, false);
         document.querySelector('form.selected_input input').value='';
     }
 );
 
 function loadFromDB() {
+    startup = true;
     fetch(`http://localhost:3000/favourites`).            
         then(
             res => {
@@ -167,7 +194,7 @@ function loadFromDB() {
                     document.querySelector('.selected_cities').appendChild(tmpl.content.cloneNode(true));
                     document.querySelector('.selected_cities').lastElementChild.childNodes[1].innerHTML = element;
                     console.log(element);
-                    getAPIDataByName(element);
+                    getAPIDataByName(element, true);
                 });
             }
         ).
@@ -177,6 +204,7 @@ function loadFromDB() {
                 window.alert("Sorry, fetch failed. Troubles with DB");
             }
         );
+    startup = false;
 }
 
 loadCurrentData();
